@@ -21,4 +21,32 @@ class Client extends Model
 
       return false;
     }
+
+    public static function clientsSort($type = false){
+      switch ($type) {
+        case 'nameAsc':
+            $clients = Client::all()->sortBy('name');
+            break;
+        case 'nameDesc':
+            $clients = Client::all()->sortByDesc('name');
+            break;
+        case 'ageAsc':
+            $clients = Client::all()->sortBy('age');
+            break;
+        case 'ageDesc':
+            $clients = Client::all()->sortByDesc('age');
+            break;
+        case 'cityAsc':
+            $clients = Client::all()->sortBy('city');
+            break;
+        case 'cityDesc':
+            $clients = Client::all()->sortByDesc('city');
+            break;
+        default:
+          $clients = Client::all();
+          break;
+        }
+
+        return $clients;
+    }
 }

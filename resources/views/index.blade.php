@@ -79,7 +79,7 @@
                   <div class="modal-body">
                     @foreach($client->phone_numbers()->get() as $item)
                       <div class="">
-                        {{ $item->number }}
+                        <a href="tel:{{ $item->number }}">{{ $item->number }}</a>
                       </div>
                     @endforeach
                   </div>
@@ -92,7 +92,7 @@
         @endforeach
         <input class="btn btn-secondary" type="submit" name="" value="Найти">
 
-        @if (isset($search))
+        @if (isset($search) && $search == true)
           <a href="{{ route('show') }}" type="button" class="back btn btn-primary">Назад</a>
         @endif
     </form>
@@ -103,35 +103,5 @@
       @endif
     @endif
   </div>
-
-  <!-- Button trigger modal -->
-  <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Launch demo modal
-  </button> -->
-
-<style media="screen">
-  .wrapper {
-      display: grid;
-      grid-template-columns: 25% 25% 25% 25%;
-      grid-template-rows: 100px;
-      border: 1px solid #cccccc;
-  }
-
-    @media (max-width: 800px) {
-      .wrapper {
-          display: grid;
-          grid-template-columns: 50% 50%;
-          grid-template-rows: 100px 100px;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .wrapper {
-          display: grid;
-          grid-template-columns: 100%;
-          grid-template-rows: 100px 100px 100px 100px;
-      }
-    }
-</style>
 
 @endsection

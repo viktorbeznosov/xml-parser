@@ -10,7 +10,6 @@ use App\ClientNumber;
 class IndexController extends Controller
 {
     public function show(Request $request){
-        $search = false;
         if ($request->get('name') !== NULL || $request->get('age') !== NULL || $request->get('city') !== NULL){
           $search = true;
           $where = array();
@@ -25,6 +24,7 @@ class IndexController extends Controller
           }
           $clients = Client::where($where)->get();
         } else {
+          $search = false;
           $clients = Client::all();
         }
 
@@ -38,29 +38,7 @@ class IndexController extends Controller
     }
 
     public function sort($type = false){
-      switch ($type) {
-        case 'nameAsc':
-            $clients = Client::all()->sortBy('name');
-            break;
-        case 'nameDesc':
-            $clients = Client::all()->sortByDesc('name');
-            break;
-        case 'ageAsc':
-            $clients = Client::all()->sortBy('age');
-            break;
-        case 'ageDesc':
-            $clients = Client::all()->sortByDesc('age');
-            break;
-        case 'cityAsc':
-            $clients = Client::all()->sortBy('city');
-            break;
-        case 'cityDesc':
-            $clients = Client::all()->sortByDesc('city');
-            break;
-        default:
-          $clients = Client::all();
-          break;
-        }
+        $clients = Client::clientsSort($type);
 
         $data = array(
           'clients' => $clients

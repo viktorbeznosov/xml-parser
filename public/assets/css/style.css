@@ -20,4 +20,28 @@ input[type="submit"]{
 .back{
     margin-top: 10px;
     width: 100%;
-}    
+}
+
+/* Grid */
+.wrapper {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-rows: 100px;
+    border: 1px solid #cccccc;
+}
+
+  @media (max-width: 800px) {
+    .wrapper {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: 100px 100px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .wrapper {
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 100px 100px 100px 100px;
+    }
+  }
