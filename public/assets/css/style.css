@@ -12,3 +12,12 @@
 input{
   width: 100%;
 }
+
+input[type="submit"]{
+  margin-top: 20px;
+}
+
+.back{
+    margin-top: 10px;
+    width: 100%;
+}    

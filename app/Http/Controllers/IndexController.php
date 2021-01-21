@@ -9,10 +9,10 @@ use App\ClientNumber;
 
 class IndexController extends Controller
 {
-    public function show(Request $request, $sort = false){
-        dump($sort);
-
+    public function show(Request $request){
+        $search = false;
         if ($request->get('name') !== NULL || $request->get('age') !== NULL || $request->get('city') !== NULL){
+          $search = true;
           $where = array();
           if ($request->get('name') !== NULL){
             $where[] = ['name','LIKE',"%".$request->get('name')."%"];
@@ -26,7 +26,40 @@ class IndexController extends Controller
           $clients = Client::where($where)->get();
         } else {
           $clients = Client::all();
-          //sortByDesc
+        }
+
+        $data = array(
+          'clients' => $clients,
+          'count' => count(Client::all()),
+          'search' => $search
+        );
+
+        return view('index' , $data);
+    }
+
+    public function sort($type = false){
+      switch ($type) {
+        case 'nameAsc':
+            $clients = Client::all()->sortBy('name');
+            break;
+        case 'nameDesc':
+            $clients = Client::all()->sortByDesc('name');
+            break;
+        case 'ageAsc':
+            $clients = Client::all()->sortBy('age');
+            break;
+        case 'ageDesc':
+            $clients = Client::all()->sortByDesc('age');
+            break;
+        case 'cityAsc':
+            $clients = Client::all()->sortBy('city');
+            break;
+        case 'cityDesc':
+            $clients = Client::all()->sortByDesc('city');
+            break;
+        default:
+          $clients = Client::all();
+          break;
         }
 
         $data = array(
@@ -34,6 +67,7 @@ class IndexController extends Controller
         );
 
         return view('index' , $data);
+
     }
 
     public function parse(){

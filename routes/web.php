@@ -14,5 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/{sort?}', 'IndexController@show')->name('show');
+Route::get('/', 'IndexController@show')->name('show');
+Route::get('/sort/{type?}', 'IndexController@sort')->name('sort');
 Route::get('/parse', 'IndexController@parse')->name('parse');
