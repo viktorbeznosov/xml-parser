@@ -46,7 +46,7 @@
             </div>
           </div>
           <div class="item">
-              <!-- <input type="text" name="phone" value="" placeholder="Телефон"> -->
+              <input class="search-batton btn btn-secondary btn-sm" type="submit" name="" value="Найти">
           </div>
         </div>
 
@@ -90,7 +90,6 @@
               </div>
             </div>
         @endforeach
-        <input class="btn btn-secondary" type="submit" name="" value="Найти">
 
         @if (isset($search) && $search == true)
           <a href="{{ route('show') }}" type="button" class="back btn btn-primary">Назад</a>
