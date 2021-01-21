@@ -14,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'IndexController@show')->name('dashboard');
-Route::get('/parse', 'IndexController@parse')->name('dashboard');
+Route::get('/{sort?}', 'IndexController@show')->name('show');
+Route::get('/parse', 'IndexController@parse')->name('parse');

@@ -1,0 +1,14 @@
+.sort i{
+  text-decoration: none;
+  color: #000;
+}
+
+.sort-wrapper{
+  margin-top: 10px;
+  display:flex;
+  justify-content: center;
+}
+
+input{
+  width: 100%;
+}

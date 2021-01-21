@@ -3,16 +3,37 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Orchestra\Parser\Xml\Facade as XmlParser;
+use Illuminate\Support\Facades\DB;
 use App\Client;
 use App\ClientNumber;
 
 class IndexController extends Controller
 {
-    public function show(){
-        die(__METHOD__);
+    public function show(Request $request, $sort = false){
+        dump($sort);
 
-        return view('index');
+        if ($request->get('name') !== NULL || $request->get('age') !== NULL || $request->get('city') !== NULL){
+          $where = array();
+          if ($request->get('name') !== NULL){
+            $where[] = ['name','LIKE',"%".$request->get('name')."%"];
+          }
+          if ($request->get('age') !== NULL){
+            $where[] = ['age','LIKE',"%".$request->get('age')."%"];
+          }
+          if ($request->get('city') !== NULL){
+            $where[] = ['city','LIKE',"%".$request->get('city')."%"];
+          }
+          $clients = Client::where($where)->get();
+        } else {
+          $clients = Client::all();
+          //sortByDesc
+        }
+
+        $data = array(
+          'clients' => $clients
+        );
+
+        return view('index' , $data);
     }
 
     public function parse(){
